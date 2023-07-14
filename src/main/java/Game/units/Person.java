@@ -15,7 +15,7 @@ public abstract class Person implements PersonInterface {
 
     protected int numberTeam;
     public int initiative;
-    protected String status;
+    public String status;
 
 
     public Person(String name,float hp, int[] damage, int attack, int x, int y, int numberTeam, int initiative) {
@@ -26,18 +26,22 @@ public abstract class Person implements PersonInterface {
         this.coordinats = new Coordinats(x,y);
         this.numberTeam = numberTeam;
         this.initiative = initiative;
-        this.status = "Stand";
+        this.status ="Stand";
     }
 
     public int findNearest(ArrayList<Person> teamProtivnic){
+        ArrayList<Person> notDeadTeam = new ArrayList<Person>();
+        for (Person p : teamProtivnic) {
+            if(!p.isDead()) notDeadTeam.add(p);
+        }
 
-        double minR = Coordinats.Rastoynie(coordinats.x, teamProtivnic.get(0).coordinats.x,coordinats.y,
-                teamProtivnic.get(0).coordinats.y);
+        double minR = Coordinats.Rastoynie(coordinats.x, notDeadTeam.get(0).coordinats.x,coordinats.y,
+                notDeadTeam.get(0).coordinats.y);
         int k = 0;
 
-        for (int i = 1; i < 10; i++) {
-            double R = Coordinats.Rastoynie(coordinats.x, teamProtivnic.get(i).coordinats.x,coordinats.y,
-                    teamProtivnic.get(i).coordinats.y);
+        for (int i = 1; i < notDeadTeam.size(); i++) {
+            double R = Coordinats.Rastoynie(coordinats.x, notDeadTeam.get(i).coordinats.x,coordinats.y,
+                    notDeadTeam.get(i).coordinats.y);
             if(R<minR) {
                 minR = R;
                 k = i;

@@ -1,5 +1,6 @@
 package Game.main;
 
+import Game.Views.AnsiColors;
 import Game.Views.Names;
 import Game.Views.View;
 import Game.units.*;
@@ -43,6 +44,8 @@ public class Main {
             }
             in.nextLine();
         }
+        if (isNotLooser(team1)) System.out.print("Green side win!");
+        else System.out.print("Blue side win!");
     }
 
     private static String getName(){

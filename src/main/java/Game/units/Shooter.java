@@ -18,9 +18,12 @@ public abstract class Shooter extends Person {
         int k = super.findNearest(teamProtivnic);
         teamProtivnic.get(k).getDamage((this.damage[1]+this.damage[0])/2);
 
-        for (int i = 0; i < team.size(); i++) {
-            if (team.get(i).getClass().equals("Farmer") && team.get(i).status.equals("Stand")) {
-                team.get(i).status = "Busy";
+       // for (int i = 0; i < team.size(); i++) {
+         for(Person p: team){
+            if (p.getClass() == Farmer.class && p.status.equals("Stand")){
+                    //team.get(i).getClass().equals("Farmer") && team.get(i).status.equals("Stand")) {
+                p.status.equals("Busy");
+                if (this.capacity == 0) this.capacity +=1 ;
 
                 return;
             }

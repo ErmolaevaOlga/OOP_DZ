@@ -18,13 +18,15 @@ public abstract class Witch extends Person {
     }
 
     public Person findeDamagePerson(ArrayList<Person> team){
-        team.sort(new Comparator<Person>() {
+        ArrayList<Person> damageSort = new ArrayList<Person>(10);
+        damageSort = team;
+        damageSort.sort(new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
                 return (int) ((o1.hp - o1.curHp) - (o2.hp - o2.curHp));
             }
         });
-        return team.get(0);
+        return damageSort.get(0);
     }
 }
 
