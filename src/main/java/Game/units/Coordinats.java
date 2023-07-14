@@ -1,4 +1,4 @@
-package units;
+package Game.units;
 
 import java.sql.Array;
 import java.util.List;

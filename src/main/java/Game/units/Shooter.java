@@ -1,4 +1,4 @@
-package units;
+package Game.units;
 import java.util.ArrayList;
 
 public abstract class Shooter extends Person {
@@ -16,13 +16,21 @@ public abstract class Shooter extends Person {
         if (this.capacity == 0) return;
 
         int k = super.findNearest(teamProtivnic);
-        teamProtivnic.get(k).curHp-= (this.damage[1]+this.damage[0])/2;
-
+        teamProtivnic.get(k).getDamage((this.damage[1]+this.damage[0])/2);
 
         for (int i = 0; i < team.size(); i++) {
-            if (team.get(i).getClass().equals("Farmer")) return;
+            if (team.get(i).getClass().equals("Farmer") && team.get(i).status.equals("Stand")) {
+                team.get(i).status = "Busy";
+
+                return;
+            }
 
         }
         this.capacity -= 1;
+    }
+
+    @Override
+    public String getInfo() {
+        return String.format("%s \u27B3: %s", super.getInfo(), this.capacity);
     }
 }

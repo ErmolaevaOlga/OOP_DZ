@@ -1,4 +1,6 @@
-package units;
+package Game.Interface;
+import Game.units.Person;
+
 import java.util.ArrayList;
 
 public interface PersonInterface {

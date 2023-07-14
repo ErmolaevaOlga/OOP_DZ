@@ -1,18 +1,27 @@
-import units.*;
+package Game.main;
+
+import Game.Views.Names;
+import Game.Views.View;
+import Game.units.*;
+
 
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class Main {
+    public static ArrayList<Person> team1;
+    public static ArrayList<Person> team2;
+    public static ArrayList<Person> teamAll;
     public static void main(String[] args) {
 
-        ArrayList<Person> team1 = newTeam(1, 1);
-        ArrayList<Person> team2 = newTeam(10,2);
-
-        ArrayList<Person> teamAll = new ArrayList<>();
+        team1 = newTeam(1, 1);
+        team2 = newTeam(10,2);
+        teamAll = new ArrayList<Person>(20);
         teamAll.addAll(team1);
         teamAll.addAll(team2);
+
         teamAll.sort(new Comparator<Person>() {
             @Override
             public int compare(Person o1, Person o2) {
@@ -20,26 +29,20 @@ public class Main {
             }
         });
 
-        printInfo(team1);
-        printInfo(team2);
-        System.out.println("_".repeat(20));
+        Scanner in = new Scanner(System.in);
 
+        while (isNotLooser(team1) && isNotLooser(team2)) {
+            View.view();
+            for (Person p : teamAll) {
 
-        for (Person p:teamAll) {
-
-            if(team1.contains(p)) {
-                p.step(team2,team1);
+                if (team1.contains(p)) {
+                    p.step(team2, team1);
+                } else {
+                    p.step(team1, team2);
+                }
             }
-            else {
-                p.step(team1,team2);
-            }
-
+            in.nextLine();
         }
-
-        printInfo(team1);
-        printInfo(team2);
-
-
     }
 
     private static String getName(){
@@ -59,22 +62,22 @@ public class Main {
                         team.add(new Crossbowman(getName(),k,i,numberTeam));
                         break;
                     case 2:
-                        team.add(new Sniper(getName(),k,i,numberTeam));
+                        team.add(new Balista(getName(),k,i,numberTeam));
                         break;
                     case 3:
-                        team.add(new Scout(getName(),k,i,numberTeam));
+                        team.add(new Rogue(getName(),k,i,numberTeam));
                         break;
                     case 4:
-                        team.add(new Spearman(getName(),k,i,numberTeam));
+                        team.add(new Swordsman(getName(),k,i,numberTeam));
                         break;
                     case 5:
-                        team.add(new Swordsman(getName(),k,i,numberTeam));
+                        team.add(new Pikeman(getName(),k,i,numberTeam));
                         break;
                     case 6:
                         team.add(new Warlock(getName(),k,i,numberTeam));
                         break;
                     case 7:
-                        team.add(new Witchdoctor(getName(),k,i,numberTeam));
+                        team.add(new Doctor(getName(),k,i,numberTeam));
                         break;
 
                     default:
@@ -85,15 +88,14 @@ public class Main {
             return team;
         }
 
-        private static void printInfo(ArrayList<Person> team){
+        private static boolean isNotLooser (ArrayList<Person> team){
+            int count=0;
             for (int i = 0; i < team.size(); i++) {
-
-                System.out.println(team.get(i).getInfo());
+                if (team.get(i).isDead()) count++;
             }
-            System.out.println("=============================================");
+            if (count == team.size()) return false;
+            return true;
         }
-
-
 
     }
 

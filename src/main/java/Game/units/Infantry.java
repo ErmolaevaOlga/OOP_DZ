@@ -1,4 +1,4 @@
-package units;
+package Game.units;
 
 public abstract class Infantry extends Person {
     int armor; // броня
