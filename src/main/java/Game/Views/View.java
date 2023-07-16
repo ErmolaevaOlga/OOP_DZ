@@ -32,7 +32,7 @@ public class View {
         for (Game.units.Person human: Main.teamAll) {
             if (human.getCoords()[0] == x && human.getCoords()[1] == y){
                 if (human.getHp() == 0) {
-                    out = "|" + (AnsiColors.ANSI_RED + human.toString().charAt(0) + AnsiColors.ANSI_RESET);
+                    out = "|" + (AnsiColors.ANSI_RED + human.getClass().getSimpleName().toString().charAt(0) + AnsiColors.ANSI_RESET);
                     break;
                 }
                 if (Main.team1.contains(human)) out = "|" + (AnsiColors.ANSI_GREEN + human.toString().charAt(11) + AnsiColors.ANSI_RESET);

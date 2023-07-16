@@ -9,8 +9,5 @@ public class Pikeman extends Infantry{
     }
 
 
-    @Override
-    public void step(ArrayList<Person> teamProtivnic, ArrayList<Person> team) {
 
-    }
 }

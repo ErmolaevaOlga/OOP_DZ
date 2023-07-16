@@ -44,6 +44,7 @@ public class Main {
             }
             in.nextLine();
         }
+        View.view();
         if (isNotLooser(team1)) System.out.print("Green side win!");
         else System.out.print("Blue side win!");
     }

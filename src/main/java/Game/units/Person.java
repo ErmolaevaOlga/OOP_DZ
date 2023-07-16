@@ -34,14 +34,12 @@ public abstract class Person implements PersonInterface {
         for (Person p : teamProtivnic) {
             if(!p.isDead()) notDeadTeam.add(p);
         }
-
-        double minR = Coordinats.Rastoynie(coordinats.x, notDeadTeam.get(0).coordinats.x,coordinats.y,
-                notDeadTeam.get(0).coordinats.y);
+        //if (notDeadTeam.size() == 0) return 0;
+        int minR = this.coordinats.rastoynie(notDeadTeam.get(0).coordinats);
         int k = 0;
 
         for (int i = 1; i < notDeadTeam.size(); i++) {
-            double R = Coordinats.Rastoynie(coordinats.x, notDeadTeam.get(i).coordinats.x,coordinats.y,
-                    notDeadTeam.get(i).coordinats.y);
+            int R = this.coordinats.rastoynie(notDeadTeam.get(i).coordinats);
             if(R<minR) {
                 minR = R;
                 k = i;
@@ -54,8 +52,8 @@ public abstract class Person implements PersonInterface {
     @Override
     public String getInfo(){
 
-        return String.format(" %s %s %s \u2764: %s \u2661: %s \u2694: %s In: %s",this.getClass().getSimpleName(),this.name,
-                this.status, this.hp, this.curHp, Arrays.toString(this.damage) , this.initiative);
+        return String.format(" %s %s %s \u2764: %s \u2661: %s \u2694: %s In: %s  X: %s Y: %s",this.getClass().getSimpleName(),this.name,
+                this.status, this.hp, this.curHp, Arrays.toString(this.damage) , this.initiative, this.coordinats.x, this.coordinats.y);
 
     }
     protected void getDamage(float damage){

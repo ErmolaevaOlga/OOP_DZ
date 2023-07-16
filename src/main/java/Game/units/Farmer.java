@@ -15,8 +15,11 @@ public class Farmer extends Person {
 
     @Override
     public void step(ArrayList<Person> teamProtivnic, ArrayList<Person> team) {
-            if (this.isDead()) return;
+            if (this.curHp == 0) return;
             status ="Stand";
-
     }
+
+
+
 }
+
